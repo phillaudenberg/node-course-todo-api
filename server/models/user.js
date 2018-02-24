@@ -12,7 +12,7 @@ var UserSchema = new mongoose.Schema({
     minLength: 1,
     unique: true,
     validate: {
-      validator: validator.isEmail,
+      validator: value => validator.isEmail(value),
       message: "{VALUE} is not a valid email"
     }
   },
@@ -31,6 +31,8 @@ var UserSchema = new mongoose.Schema({
       required: true
     }
   }]
+}, {
+  usePushEach: true
 });
 
 UserSchema.methods.toJSON = function() {
